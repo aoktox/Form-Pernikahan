@@ -12,7 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('index');
+    /*return view('index');*/
+    return redirect('/qr');
 });
 /*Route::get('qr', function () {
     return view('qr');
