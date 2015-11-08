@@ -13,7 +13,6 @@
 
 Route::get('/', function () {
     return view('index');
-    /*return redirect('/qr');*/
 });
 /*Route::get('qr', function () {
     return view('qr');
@@ -26,3 +25,7 @@ Route::match(['get','post'],'qr',function(){
         return view('qr');
 });
 Route::get('daftar','PendaftaranController@index');
+
+Route::get('step',function(){
+   return view('demo');
+});

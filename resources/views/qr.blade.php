@@ -9,6 +9,10 @@
     <!-- Site Properities -->
     <title>QR Code Generator</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('semantic/dist/semantic.css') }}">
+    {{--{{ HTML::style('semantic/dist/semantic.css') }}
+
+    {{ HTML::script('semantic/js/jquery-1.11.3.min.js') }}
+    {{ HTML::script('semantic/dist/semantic.js') }}--}}
     <script src="{{ asset('semantic/js/jquery-1.11.3.min.js') }}"></script>
     <script src="{{asset('semantic/dist/semantic.js')}}"></script>
 
@@ -26,6 +30,22 @@
             max-width: 450px;
         }
     </style>
+    <script>
+        var formValidationRules=
+        {
+            //Below line is property name, and does not reflect the name or id of the target element to validate
+            //It could be anything, as long as it's unique to other properties
+            stringasal: {
+                identifier  : 'stringasal',
+                rules: [
+                    {
+                        type   : 'empty',
+                        prompt : 'Please enter your text, add http:// for link'
+                    }
+                ]
+            },
+        }
+    </script>
     <script>
         $(document)
                 .ready(function() {
@@ -58,7 +78,7 @@
                 Generate your QR
             </div>
         </h2>
-        <form class="ui large form" method="POST" action="{{url('qr')}}">
+        <form class="ui large form" method="POST" action="{{url('qr')}}" id="testForm">
             {{ csrf_field() }}
             <div class="ui stacked segment">
                 <div class="field">
@@ -84,7 +104,7 @@
         <div class="content">
             <div class="ui grid">
                 <div class="six wide column">
-                    <img src="data:image/png;base64, {{ base64_encode(QrCode::format('png')->encoding('UTF-8')->size(300)->generate(old('stringasal'))) }} ">
+                    <img src="data:image/png;base64, {{ base64_encode(QrCode::format('png')->merge('/public/img/osc.png', .3,5)->errorCorrection('H')->encoding('UTF-8')->size(300)->generate(old('stringasal'))) }} ">
                 </div>
                 <div class="ten wide column">
                     <div class="ui segment">
