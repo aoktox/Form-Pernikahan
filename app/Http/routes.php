@@ -29,3 +29,24 @@ Route::get('daftar','PendaftaranController@index');
 Route::get('step',function(){
    return view('demo');
 });
+
+Route::post('submit-daftar','PendaftaranController@Submit');
+
+Route::group(['prefix' => 'wilayah'],function(){
+    Route::get('provinsi/{id}',[
+        'as' => 'provinsi',
+        'uses' => 'Indonesia@getProvinsi',
+    ]);
+    Route::post('kabupaten',[
+        'as' => 'kabupaten',
+        'uses' => 'Indonesia@getKabupaten',
+    ]);
+    Route::post('kecamatan',[
+        'as' => 'kecamatan',
+        'uses' => 'Indonesia@getKecamatan',
+    ]);
+    Route::post('desa',[
+        'as' => 'desa',
+        'uses' => 'Indonesia@getDesa',
+    ]);
+});

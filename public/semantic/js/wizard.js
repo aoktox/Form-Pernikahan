@@ -130,7 +130,7 @@ angular.module('angularify.semantic.wizard', [])
                             '{{step.title}}' + 
                           '</div>' + 
                         '</div>' + 
-                        '<div class="ui hidden divider"></div>' +
+                        /*'<div class="ui hidden divider"></div>' +*/
                         '<div ng-transclude></div>' + 
                       '</div>',
             link: function(scope, element, attrs, WizardController) {
