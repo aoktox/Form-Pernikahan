@@ -25,12 +25,11 @@ Route::match(['get','post'],'qr',function(){
         return view('qr');
 });
 Route::get('daftar','PendaftaranController@index');
+Route::post('daftar','PendaftaranController@Submit');
 
 Route::get('step',function(){
    return view('demo');
 });
-
-Route::post('submit-daftar','PendaftaranController@Submit');
 
 Route::group(['prefix' => 'wilayah'],function(){
     Route::get('provinsi/{id}',[

@@ -15,6 +15,10 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         // $this->call(UserTableSeeder::class);
+        $this->call(agama_seeder::class);
+        $this->call(Status_Kawin_seeder::class);
+        $this->call(Pendidikan_seeder::class);
+        //$this->call(Penduduk_seeder::class);
         Model::reguard();
     }
 }

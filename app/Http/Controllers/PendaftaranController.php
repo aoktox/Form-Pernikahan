@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Agama;
+use App\Istri;
+use App\Pendidikan;
 use App\Provinsi;
+use App\StatusKawin;
+use App\Suami;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -18,6 +24,9 @@ class PendaftaranController extends Controller
     {
         $data=[
             'provinsi'=> Provinsi::all(),
+            'agama' => Agama::all(),
+            'status' => StatusKawin::all(),
+            'pendidikan' => Pendidikan::all()
         ];
         return view('page.daftar',$data);
     }
@@ -40,9 +49,9 @@ class PendaftaranController extends Controller
      */
     public function Submit(Request $request)
     {
-        //dd($request->suami['nik']);
-        dd($request->all());
         $dataSuami = $request->suami;
+        $dataSuami['tglLhr']= Carbon::createFromFormat('m/d/Y',$dataSuami['tglLhr'])->format('Y-m-d');
+
         $dataAyahSuami = $request->AyahSuami;
         $dataIbuSuami = $request->IbuSuami;
         $dataIstri = $request->istri;
@@ -52,6 +61,13 @@ class PendaftaranController extends Controller
         $dataSaksiII = $request->SaksiII;
         $DataPerkawinan = $request->DataPerkawinan;
         $dataDoc = $request->doc;
+
+
+        //$date = Carbon::createFromFormat('d/m/Y',$dataSuami['tglLhr']);
+        //dd($date->format('Y-m-d'));
+        //dd($dataSuami['tglLhr']);
+        Suami::create($dataSuami);
+        dd($request->all());
     }
 
     /**
