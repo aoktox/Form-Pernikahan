@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Penduduk extends Model
 {
-    protected $fillable=['nik','nama','kk'];
+    public $timestamps=false;
+    protected $fillable=['nama','nik','jkel','tmpLhr','tglLhr','agama','pendidikan','job','status_kawin','kwn','pasport','kk','nik'];
 
     public function Kepala(){
         $this->hasMany('App\Penduduk','kk','nik');

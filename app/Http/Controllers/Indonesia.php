@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Desa;
 use App\Kabupaten;
 use App\Kecamatan;
+use App\Penduduk;
 use App\Provinsi;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -32,5 +33,11 @@ class Indonesia extends Controller
     public function getDesa(Request $request){
         $data = Desa::where('id_kecamatan', $request->id)->get();
         return response()->json($data);
+    }
+
+    public function cekNik(Request $request)
+    {
+        $data = Penduduk::where('nik', $request->id);
+        return response()->json($data->get());
     }
 }

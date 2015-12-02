@@ -66,6 +66,7 @@ class PendaftaranController extends Controller
         //$date = Carbon::createFromFormat('d/m/Y',$dataSuami['tglLhr']);
         //dd($date->format('Y-m-d'));
         //dd($dataSuami['tglLhr']);
+        dd($request->all());
         Suami::create($dataSuami);
         dd($request->all());
     }
@@ -113,5 +114,9 @@ class PendaftaranController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function cetak(){
+        return view('cetak');
     }
 }

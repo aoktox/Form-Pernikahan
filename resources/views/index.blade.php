@@ -14,7 +14,7 @@
                     <li>Membawa Hasil Cetak Form Pendaftaran beserta kelengkapan persyaratan ke Dispenduk untuk diverifikasi Petugas.</li>
                 </ul>
             </div>
-            <div class="ui card link">
+            {{--<div class="ui card link">
                 <div class="content">
                     <div class="header">Project Timeline</div>
                 </div>
@@ -47,8 +47,8 @@
                 <div class="extra content">
                     <button class="ui button">Join Project</button>
                 </div>
-            </div>
-            <div class="ui cards link">
+            </div>--}}
+            {{--<div class="ui cards link">
                 <div class="card">
                     <div class="content">
                         <div class="header">Project Timeline</div>
@@ -79,7 +79,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>--}}
         </div>
     </div>
 @stop

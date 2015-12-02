@@ -25,8 +25,9 @@ Route::match(['get','post'],'qr',function(){
         return view('qr');
 });
 Route::get('daftar','PendaftaranController@index');
+Route::get('cetak','PendaftaranController@cetak');
 Route::post('daftar','PendaftaranController@Submit');
-
+Route::post('cekNik','Indonesia@cekNik');
 Route::get('step',function(){
    return view('demo');
 });

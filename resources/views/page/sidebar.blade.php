@@ -21,14 +21,15 @@
         {{--<div class="ui label">1</div>--}}
         Edit Pendaftaran
     </a>
-    <a class="item">
+    <a class="item" href="{{url('cetak')}}">
         {{--<div class="ui label">1</div>--}}
         Cetak Bukti Pendaftaran
     </a>
-    <div class="item">
+    <div class="item" style="text-align: center;">
         <div class="ui statistic">
             <div class="value">
-                40,509
+                {{--40,509--}}
+                {{ DB::table('pendaftaran')->count()  }}
             </div>
             <div class="label">
                 Pendaftar

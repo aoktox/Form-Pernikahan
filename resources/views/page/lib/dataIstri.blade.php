@@ -166,7 +166,7 @@
                 <div class="three wide field">
                     <label>Kewarganegaraan</label>
                     <select class="ui fluid dropdown" name="istri[kwn]">
-                        <option value="">Pilih Kelurahan</option>
+                        <option value="">Kewarganegaraan</option>
                         <option value="WNI">WNI</option>
                         <option value="WNA">WNA</option>
                     </select>
