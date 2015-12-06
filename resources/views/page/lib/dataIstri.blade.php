@@ -72,7 +72,7 @@
                 <div class="three fields">
                     <div class="field">
                         <label>Provinsi</label>
-                        <select onchange="getKab()" id="propinsi" class="ui fluid search dropdown" name="istri[prov]">
+                        <select id="propinsi_istri" class="ui fluid search dropdown" name="istri[prov]">
                             <option value="">Pilih Provinsi</option>
                             @foreach($provinsi as $p)
                                 <option value="{{ $p->id }}">{{ $p->nama }}</option>
@@ -81,13 +81,13 @@
                     </div>
                     <div class="field">
                         <label>Kabupaten</label>
-                        <select onchange="getKec()" id="kabupaten_list" class="ui fluid search dropdown" name="istri[kab]">
+                        <select id="kabupaten_istri" class="ui fluid search dropdown" name="istri[kab]">
                             <option value="">Pilih Kabupaten</option>
                         </select>
                     </div>
                     <div class="field">
                         <label>Kecamatan</label>
-                        <select onchange="getDesa()" id="kecamatan_list" class="ui fluid search dropdown" name="istri[kec]">
+                        <select id="kecamatan_istri" class="ui fluid search dropdown" name="istri[kec]">
                             <option value="">Pilih Kecamatan</option>
                         </select>
                     </div>
@@ -95,7 +95,7 @@
                 <div class="fields">
                     <div class="ten wide field">
                         <label>Kelurahan</label>
-                        <select id="desa_list" class="ui fluid search dropdown" name="istri[kel]">
+                        <select id="desa_istri" class="ui fluid search dropdown" name="istri[kel]">
                             <option value="">Pilih Kelurahan</option>
                         </select>
                     </div>

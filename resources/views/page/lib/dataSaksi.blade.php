@@ -9,41 +9,40 @@
                         <label>NIK</label>
                         <div class="ui icon input">
                             <div class="ui corner labeled input">
-                                <input type="text" placeholder="NIK" name="SaksiI[nik]">
+                                <input type="text" placeholder="NIK" id="nikSaksi1" name="SaksiI[nik]">
                                 <div class="ui corner label">
                                     <i class="asterisk icon"></i>
                                 </div>
                             </div>
                             &nbsp;
-                            <a class="ui button">
-                                Cek
-                            </a>
+                            <a class="ui positive button" data-asal="Saksi1" id="cek_nik_Saksi1">Cek</a>
                         </div>
+                        <label id="errorSaksi1" style="color: #912D2B"></label>
                     </div>
                 </div>
                 <div class="eight wide field">
                     <label>Nama Lengkap</label>
                     <div class="ui corner labeled input">
-                        <input type="text" placeholder="Nama Lengkap" name="SaksiI[nama]">
+                        <input type="text" placeholder="Nama Lengkap" name="SaksiI[nama]" id="namaSaksi1">
                         <div class="ui corner label">
                             <i class="asterisk icon"></i>
                         </div>
                     </div>
                 </div>
-                <div class="five wide field">
+                <div class="five wide field sembunyi Saksi1">
                     <label>Agama</label>
-                    <select class="ui fluid dropdown" name="SaksiI[agama]">
+                    <select class="ui fluid dropdown agama Saksi1" name="SaksiI[agama]">
                         <option value="">Agama</option>
                         @foreach($agama as $p)
                             <option value="{{ $p->id }}">{{ $p->nama }}</option>
                         @endforeach
                     </select>
                 </div>
-                <div class="two fields">
+                <div class="two fields sembunyi Saksi1">
                     <div class="field">
                         <label>Tempat Lahir</label>
                         <div class="ui corner labeled input">
-                            <input type="text" placeholder="Tempat Lahir" name="SaksiI[tmpLhr]">
+                            <input type="text" placeholder="Tempat Lahir" name="SaksiI[tmpLhr]" id="tmpLhrSaksi1">
                             <div class="ui corner label">
                                 <i class="asterisk icon"></i>
                             </div>
@@ -53,7 +52,7 @@
                         <label>Tanggal Lahir</label>
                         <div class="ui right labeled left icon input">
                             <i class="calendar icon"></i>
-                            <input type="text" name="SaksiI[tglLhr]" class="birthday" value="" placeholder="Tanggal lahir" />
+                            <input type="text" name="SaksiI[tglLhr]" class="birthday" value="" placeholder="Tanggal lahir" id="tglLhrSaksi1" />
                             <a class="ui corner label">
                                 <i class="asterisk icon"></i>
                             </a>
@@ -112,9 +111,9 @@
                         <label>Telepon</label>
                         <input name="SaksiI[telp]" type="text">
                     </div>
-                    <div class="eight wide field">
+                    <div class="eight wide field sembunyi Saksi1">
                         <label>Pekerjaan</label>
-                        <input name="SaksiI[job]" type="text">
+                        <input name="SaksiI[job]" type="text" id="jobSaksi1">
                     </div>
                 </div>
             </div>
@@ -130,41 +129,40 @@
                         <label>NIK</label>
                         <div class="ui icon input">
                             <div class="ui corner labeled input">
-                                <input type="text" placeholder="NIK" name="SaksiII[nik]">
+                                <input type="text" placeholder="NIK" id="nikSaksi2" name="SaksiII[nik]">
                                 <div class="ui corner label">
                                     <i class="asterisk icon"></i>
                                 </div>
                             </div>
                             &nbsp;
-                            <a class="ui button">
-                                Cek
-                            </a>
+                            <a class="ui positive button" data-asal="Saksi2" id="cek_nik_Saksi2">Cek</a>
                         </div>
+                        <label id="errorSaksi2" style="color: #912D2B"></label>
                     </div>
                 </div>
                 <div class="eight wide field">
                     <label>Nama Lengkap</label>
                     <div class="ui corner labeled input">
-                        <input type="text" placeholder="Nama Lengkap" name="SaksiII[nama]">
+                        <input type="text" placeholder="Nama Lengkap" name="SaksiII[nama]" id="namaSaksi2">
                         <div class="ui corner label">
                             <i class="asterisk icon"></i>
                         </div>
                     </div>
                 </div>
-                <div class="five wide field">
+                <div class="five wide field sembunyi Saksi2">
                     <label>Agama</label>
-                    <select class="ui fluid dropdown" name="SaksiII[agama]">
+                    <select class="ui fluid dropdown agama Saksi2" name="SaksiII[agama]">
                         <option value="">Agama</option>
                         @foreach($agama as $p)
                             <option value="{{ $p->id }}">{{ $p->nama }}</option>
                         @endforeach
                     </select>
                 </div>
-                <div class="two fields">
+                <div class="two fields sembunyi Saksi2">
                     <div class="field">
                         <label>Tempat Lahir</label>
                         <div class="ui corner labeled input">
-                            <input type="text" placeholder="Tempat Lahir" name="SaksiII[tmpLhr]">
+                            <input type="text" placeholder="Tempat Lahir" name="SaksiII[tmpLhr]" id="tmpLhrSaksi2">
                             <div class="ui corner label">
                                 <i class="asterisk icon"></i>
                             </div>
@@ -174,7 +172,7 @@
                         <label>Tanggal Lahir</label>
                         <div class="ui right labeled left icon input">
                             <i class="calendar icon"></i>
-                            <input type="text" name="SaksiII[tglLhr]" class="birthday" value="" placeholder="Tanggal lahir" />
+                            <input type="text" name="SaksiII[tglLhr]" class="birthday" value="" placeholder="Tanggal lahir" id="tglLhrSaksi2"/>
                             <a class="ui corner label">
                                 <i class="asterisk icon"></i>
                             </a>
@@ -233,15 +231,13 @@
                         <label>Telepon</label>
                         <input name="SaksiII[telp]" type="text">
                     </div>
-                    <div class="eight wide field">
+                    <div class="eight wide field sembunyi Saksi2">
                         <label>Pekerjaan</label>
-                        <input name="SaksiII[job]" type="text">
+                        <input name="SaksiII[job]" type="text" id="jobSaksi2">
                     </div>
                 </div>
             </div>
-            <div class="ui positive right labeled icon button" wz-next>
-                Kirim<i class="check icon"></i>
-            </div>
+            <div class="ui positive right labeled icon button" wz-next>Tahap berikutnya<i class="check icon"></i></div>
         </div>
     </section>
 </wizard-pane>

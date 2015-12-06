@@ -413,11 +413,16 @@ $(document).ready(function() {
                 setTimeout(function(){
                  $('#cek_nik_suami').removeClass('loading');
                  },500);
-                console.log('sukses');
-                console.log(hasil);
-                if (hasil.length == 0) {
+                //console.log('sukses');
+                //console.log(hasil);
+                if (hasil.length == 0 || hasil[0].jkel!="L") {
                     //console.log('0');
-                    $('#errorSuami').text("Data NIK tidak tersedia");
+                    if(hasil.length == 0) {
+                        $('#errorSuami').text("Data NIK tidak tersedia");
+                    }
+                    else if(hasil[0].jkel!="L"){
+                        $('#errorSuami').text("Pastikan Suami adalah PRIA");
+                    }
                     $('#namaSuami').val("").removeAttr("readonly");
                     $('#jobSuami').val("");
                     $('#KKSuami').val("");
@@ -433,7 +438,7 @@ $(document).ready(function() {
                 else {
                     $('#errorSuami').text("");
                     var date = new Date(hasil[0].tglLhr);
-                    $('#namaSuami').val(hasil[0].nama).attr("readonly");
+                    $('#namaSuami').val(hasil[0].nama).attr("readonly","");
                     $('#jobSuami').val(hasil[0].job);
                     $('#KKSuami').val(hasil[0].kk);
                     $('.agama.suami').dropdown('set selected', hasil[0].agama);
@@ -463,8 +468,8 @@ $(document).ready(function() {
                 setTimeout(function(){
                     $('#cek_nik_ayah_suami').removeClass('loading');
                 },500);
-                console.log('sukses Ayah');
-                console.log(hasil);
+                //console.log('sukses Ayah');
+                //console.log(hasil);
                 if (hasil.length == 0) {
                     //console.log('0');
                     //$('.sembunyi.Ayahsuami').slideDown("slow");
@@ -485,7 +490,7 @@ $(document).ready(function() {
                 else {
                     var date = new Date(hasil[0].tglLhr);
                     $('#errorAyahSuami').text("");
-                    $('#namaAyahSuami').val(hasil[0].nama).attr("readonly");
+                    $('#namaAyahSuami').val(hasil[0].nama).attr("readonly","");
                     $('#jobAyahSuami').val(hasil[0].job);
                     $('.agama.Ayahsuami').dropdown('set selected', hasil[0].agama);
                     $('#tglLhrAyahSuami').val((date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear());
@@ -510,8 +515,8 @@ $(document).ready(function() {
                 setTimeout(function(){
                     $('#cek_nik_ibu_suami').removeClass('loading');
                 },500);
-                console.log('sukses Ibu');
-                console.log(hasil);
+                //console.log('sukses Ibu');
+                //console.log(hasil);
                 if (hasil.length == 0) {
                     $('#errorIbuSuami').text("Data NIK tidak tersedia");
                     $('#namaIbuSuami').val("").removeAttr("readonly");
@@ -529,7 +534,7 @@ $(document).ready(function() {
                 else {
                     var date = new Date(hasil[0].tglLhr);
                     $('#errorIbuSuami').text("");
-                    $('#namaIbuSuami').val(hasil[0].nama).attr("readonly");
+                    $('#namaIbuSuami').val(hasil[0].nama).attr("readonly","");
                     $('#jobIbuSuami').val(hasil[0].job);
                     $('.agama.IbuSuami').dropdown('set selected', hasil[0].agama);
                     $('#tglLhrIbuSuami').val((date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear());
@@ -558,10 +563,16 @@ $(document).ready(function() {
                 setTimeout(function(){
                     $('#cek_nik_istri').removeClass('loading');
                 },500);
-                console.log('sukses');
-                console.log(hasil);
-                if (hasil.length == 0) {
-                    $('#errorIstri').text("Data NIK tidak tersedia");
+                //console.log('sukses');
+                //console.log(hasil);
+                if (hasil.length == 0||hasil[0].jkel!="P") {
+                    //$('#errorIstri').text("Data NIK tidak tersedia");
+                    if(hasil.length == 0) {
+                        $('#errorIstri').text("Data NIK tidak tersedia");
+                    }
+                    else if(hasil[0].jkel!="P"){
+                        $('#errorIstri').text("Pastikan istri adalah WANITA");
+                    }
                     $('#namaIstri').val("").removeAttr("readonly");
                     $('#jobIstri').val("");
                     $('#KKIstri').val("");
@@ -577,7 +588,7 @@ $(document).ready(function() {
                 else {
                     $('#errorIstri').text("");
                     var date = new Date(hasil[0].tglLhr);
-                    $('#namaIstri').val(hasil[0].nama).attr("readonly");
+                    $('#namaIstri').val(hasil[0].nama).attr("readonly","");
                     $('#jobIstri').val(hasil[0].job);
                     $('#KKIstri').val(hasil[0].kk);
                     $('.agama.istri').dropdown('set selected', hasil[0].agama);
@@ -624,7 +635,7 @@ $(document).ready(function() {
                 else {
                     var date = new Date(hasil[0].tglLhr);
                     $('#errorAyahIstri').text("");
-                    $('#namaAyahIstri').val(hasil[0].nama).attr("readonly");
+                    $('#namaAyahIstri').val(hasil[0].nama).attr("readonly","");
                     $('#jobAyahIstri').val(hasil[0].job);
                     $('.agama.Ayahistri').dropdown('set selected', hasil[0].agama);
                     $('#tglLhrAyahIstri').val((date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear());
@@ -668,7 +679,7 @@ $(document).ready(function() {
                 else {
                     var date = new Date(hasil[0].tglLhr);
                     $('#errorIbuIstri').text("");
-                    $('#namaIbuIstri').val(hasil[0].nama).attr("readonly");
+                    $('#namaIbuIstri').val(hasil[0].nama).attr("readonly","");
                     $('#jobIbuIstri').val(hasil[0].job);
                     $('.agama.IbuIstri').dropdown('set selected', hasil[0].agama);
                     $('#tglLhrIbuIstri').val((date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear());
@@ -682,3 +693,54 @@ $(document).ready(function() {
     });
 });
 //END CEK ISTRI
+
+function cekNIK(idx){
+    console.log(idx);
+    $.ajax({
+        type: 'POST',
+        url: "cekNik",
+        data: {id: $('#nik'+idx).val()},
+        success: function (hasil) {
+            setTimeout(function(){
+                $("#cek_nik_"+idx).removeClass('loading');
+            },500);
+            console.log('sukses Saksi');
+            console.log(hasil);
+            if (hasil.length == 0) {
+                $('#error'+idx).text("Data NIK tidak tersedia");
+                $('#nama'+idx).val("").removeAttr("readonly");
+                $('#job'+idx).val("");
+                $('.agama.'+idx).dropdown('clear');
+                $('#tglLhr'+idx).val("");
+                $('#tmpLhr'+idx).val("");
+                $('.sembunyi.'+idx).slideDown("slow");
+            }
+            else {
+                var date = new Date(hasil[0].tglLhr);
+                $('#error'+idx).text("");
+                $('#nama'+idx).val(hasil[0].nama).attr("readonly","");
+                $('#job'+idx).val(hasil[0].job);
+                $('.agama.'+idx).dropdown('set selected', hasil[0].agama);
+                $('#tglLhr'+idx).val((date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear());
+                $('#tmpLhr'+idx).val(hasil[0].tmpLhr);
+                $('.sembunyi.'+idx).slideUp("slow");
+            }
+        }
+    });
+}
+//CEK SAKSI
+$(document).ready(function() {
+    $('#cek_nik_Saksi1').click(function (e) {
+        e.preventDefault();
+        $(this).addClass('loading');
+        var data = $(this).data("asal");
+        cekNIK(data);
+    });
+    $('#cek_nik_Saksi2').click(function (e) {
+        e.preventDefault();
+        $(this).addClass('loading');
+        var data = $(this).data("asal");
+        cekNIK(data);
+    });
+});
+//END CEK SAKSI

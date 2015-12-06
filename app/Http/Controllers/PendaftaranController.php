@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class PendaftaranController extends Controller
 {
@@ -20,8 +21,11 @@ class PendaftaranController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //private $unikKey;
+
     public function index()
     {
+        $this->unikKey="NKH_".date("ymdHis");
         $data=[
             'provinsi'=> Provinsi::all(),
             'agama' => Agama::all(),
@@ -47,12 +51,45 @@ class PendaftaranController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    private function uploadDoc($file,$path){
+        $index = [
+            'ktpSuami' => 'KTP_Suami',
+            'ktpIstri' => 'KTP_Istri',
+            'sk' => 'SK_Desa',
+            'foto' => 'Foto_Suami_Istri',
+            'aktaSUami' => 'Akta_Suami',
+            'aktaIstri' => 'Akta_Istri',
+            'aktaCerai' => 'Akta_Perceraian_Kematian',
+            'skABRI' => 'Surat_Izin_Kawin_dari_komandan',
+            'janji' => 'Surat_Perjanjian_Kawin',
+            'skAgama' => 'SK_Penghayat_Kepercayaan'
+        ];
+        foreach($index as $i){
+            $key = array_search($i, $index);
+            if($file[$key]==null){
+                break;
+            }
+            else{
+                $name=$i.'.'.$file[$key]->getClientOriginalExtension();
+                $file[$key]->move($path,$name);
+//                echo "<pre>";
+//                echo $file[$key]->getClientOriginalName();
+//                echo "<br/>";
+//                echo $name;
+//                echo "<pre>";
+            }
+        }
+        //dd($this->unikKey);
+    }
     public function Submit(Request $request)
     {
+        $path=storage_path('Doc').'/'.$this->unikKey.'/';
+
+        //dd($request->all());
         $dataSuami = $request->suami;
         $dataSuami['tglLhr']= Carbon::createFromFormat('m/d/Y',$dataSuami['tglLhr'])->format('Y-m-d');
-
         $dataAyahSuami = $request->AyahSuami;
+
         $dataIbuSuami = $request->IbuSuami;
         $dataIstri = $request->istri;
         $dataAyahIstri = $request->AyahIstri;
@@ -60,9 +97,14 @@ class PendaftaranController extends Controller
         $dataSaksiI = $request->SaksiI;
         $dataSaksiII = $request->SaksiII;
         $DataPerkawinan = $request->DataPerkawinan;
-        $dataDoc = $request->doc;
+        //$dataDoc = $request->doc;
 
+        //$name=$request->file('doc.ktpSuami')->getClientOriginalName();
+        //$request->file('doc.ktpSuami')->move($path,$name);
 
+        //Storage::put('file.png', $request->file('doc.ktpSuami'));
+        $this->uploadDoc($request->file('doc'),$path);
+        //dd($request->file('doc'));
         //$date = Carbon::createFromFormat('d/m/Y',$dataSuami['tglLhr']);
         //dd($date->format('Y-m-d'));
         //dd($dataSuami['tglLhr']);

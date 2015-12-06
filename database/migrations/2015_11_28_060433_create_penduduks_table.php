@@ -15,7 +15,7 @@ class CreatePenduduksTable extends Migration
         Schema::create('penduduks', function (Blueprint $table) {
             $table->string('nama');
             $table->string('nik');
-            $table->tinyInteger('jkel');
+            $table->char('jkel',1);
             $table->string('tmpLhr');
             $table->date('tglLhr');
             $table->integer('agama');

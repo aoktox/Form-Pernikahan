@@ -13,8 +13,20 @@ class CreatePendaftaranTable extends Migration
     public function up()
     {
         Schema::create('pendaftaran', function (Blueprint $table) {
-            $table->increments('id');
+            $table->string('id');
+            $table->string('suami_id');
+            $table->string('AyahSuami_id');
+            $table->string('IbuSuami_id');
+            $table->string('istri_id');
+            $table->string('AyahIstri_id');
+            $table->string('IbuIstri_id');
+            $table->string('SaksiI_id');
+            $table->string('SaksiII_id');
+            $table->string('DataPerkawinan_id');
+            $table->string('doc_id');
             $table->timestamps();
+
+            $table->primary('id');
         });
     }
 

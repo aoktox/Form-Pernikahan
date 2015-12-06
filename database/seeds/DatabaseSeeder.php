@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(agama_seeder::class);
         $this->call(Status_Kawin_seeder::class);
         $this->call(Pendidikan_seeder::class);
-        //$this->call(Penduduk_seeder::class);
+        $this->call(Penduduk_seeder::class);
         Model::reguard();
     }
 }

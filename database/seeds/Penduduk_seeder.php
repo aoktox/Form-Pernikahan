@@ -12,12 +12,14 @@ class Penduduk_seeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create();
+        $jkel = ["L","P"];
         DB::table('penduduks')->delete();
         foreach(range(1,20) as $index){
             $data=[
                 'nama'=>$faker->name,
-                'nik'=>$faker->randomNumber($nbDigits = NULL),
-                'jkel'=>$faker->numberBetween(1,2),
+                'nik'=>rand(1111111111111111,9999999999999999),
+                //'jkel'=>$faker->numberBetween(1,2),
+                'jkel'=>$jkel[$faker->numberBetween(0,1)],
                 'tmpLhr'=>$faker->city,
                 'tglLhr'=>$faker->date(),
                 'agama'=>$faker->numberBetween(1,7),
