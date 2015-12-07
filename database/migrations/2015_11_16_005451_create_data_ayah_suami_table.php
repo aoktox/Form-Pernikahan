@@ -27,7 +27,7 @@ class CreateDataAyahSuamiTable extends Migration
             $table->integer('rw');
             $table->integer('kdPos');
             $table->string('telp');
-            $table->integer('job');
+            $table->string('job');
             $table->timestamps();
             $table->primary('nik');
         });

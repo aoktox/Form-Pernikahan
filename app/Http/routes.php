@@ -26,11 +26,22 @@ Route::match(['get','post'],'qr',function(){
 });
 Route::get('daftar','PendaftaranController@index');
 Route::get('cetak','PendaftaranController@cetak');
+Route::get('sukses','PendaftaranController@sukses');
 Route::post('daftar','PendaftaranController@Submit');
 Route::post('cekNik','Indonesia@cekNik');
-Route::get('step',function(){
-   return view('demo');
-});
+Route::post('print','PendaftaranController@printGan');
+
+//Route::post('print',function(\Symfony\Component\HttpFoundation\Request $request){
+//   //return view('demo');
+//    $data = [
+//        'test' => 'halo',
+//    ];
+//    $pdf = App::make('dompdf.wrapper');
+//    $pdf->loadHTML('<h1>Form Pendaftaran</h1><br/><h2>Nomor pendaftaran :'.$request->daftar_num.'</h2>');
+//    return $pdf->stream();
+//    //$pdf = \PDF::loadView('welcome');
+//    //return $pdf->download('test.pdf');
+//});
 
 Route::group(['prefix' => 'wilayah'],function(){
     Route::get('provinsi/{id}',[

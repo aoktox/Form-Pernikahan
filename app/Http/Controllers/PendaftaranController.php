@@ -3,15 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Agama;
+use App\AyahIstri;
+use App\AyahSuami;
+use App\DataPerkawinan;
+use App\IbuIstri;
+use App\IbuSuami;
 use App\Istri;
+use App\Pendaftaran;
 use App\Pendidikan;
 use App\Provinsi;
+use App\SaksiI;
+use App\SaksiII;
 use App\StatusKawin;
 use App\Suami;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
 
 class PendaftaranController extends Controller
@@ -21,11 +30,15 @@ class PendaftaranController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    //private $unikKey;
+    private $unikKey;
+
+    function __construct()
+    {
+        $this->unikKey="NKH_".date("ymdHis");
+    }
 
     public function index()
     {
-        $this->unikKey="NKH_".date("ymdHis");
         $data=[
             'provinsi'=> Provinsi::all(),
             'agama' => Agama::all(),
@@ -83,34 +96,75 @@ class PendaftaranController extends Controller
     }
     public function Submit(Request $request)
     {
-        $path=storage_path('Doc').'/'.$this->unikKey.'/';
-
         //dd($request->all());
+        $path=storage_path('Doc').'/'.$this->unikKey.'/';
+        //Suami
         $dataSuami = $request->suami;
         $dataSuami['tglLhr']= Carbon::createFromFormat('m/d/Y',$dataSuami['tglLhr'])->format('Y-m-d');
+
         $dataAyahSuami = $request->AyahSuami;
+        $dataAyahSuami['tglLhr']= Carbon::createFromFormat('m/d/Y',$dataAyahSuami['tglLhr'])->format('Y-m-d');
 
         $dataIbuSuami = $request->IbuSuami;
+        $dataIbuSuami['tglLhr']= Carbon::createFromFormat('m/d/Y',$dataIbuSuami['tglLhr'])->format('Y-m-d');
+
+        //Istri
         $dataIstri = $request->istri;
+        $dataIstri['tglLhr']= Carbon::createFromFormat('m/d/Y',$dataIstri['tglLhr'])->format('Y-m-d');
+
         $dataAyahIstri = $request->AyahIstri;
+        $dataAyahIstri['tglLhr']= Carbon::createFromFormat('m/d/Y',$dataAyahIstri['tglLhr'])->format('Y-m-d');
+
         $dataIbuIstri = $request->IbuIstri;
+        $dataIbuIstri['tglLhr']= Carbon::createFromFormat('m/d/Y',$dataIbuIstri['tglLhr'])->format('Y-m-d');
+
+        //Saksi
         $dataSaksiI = $request->SaksiI;
+        $dataSaksiI['tglLhr']= Carbon::createFromFormat('m/d/Y',$dataSaksiI['tglLhr'])->format('Y-m-d');
+
         $dataSaksiII = $request->SaksiII;
+        $dataSaksiII['tglLhr']= Carbon::createFromFormat('m/d/Y',$dataSaksiII['tglLhr'])->format('Y-m-d');
+
         $DataPerkawinan = $request->DataPerkawinan;
-        //$dataDoc = $request->doc;
-
-        //$name=$request->file('doc.ktpSuami')->getClientOriginalName();
-        //$request->file('doc.ktpSuami')->move($path,$name);
-
-        //Storage::put('file.png', $request->file('doc.ktpSuami'));
+        $DataPerkawinan['tglPemberkatan']= Carbon::createFromFormat('m/d/Y',$DataPerkawinan['tglPemberkatan'])->format('Y-m-d');
+        $DataPerkawinan['tglPencatatan']= Carbon::createFromFormat('m/d/Y',$DataPerkawinan['tglPencatatan'])->format('Y-m-d');
+        $DataPerkawinan['tglPutusan']= Carbon::createFromFormat('m/d/Y',$DataPerkawinan['tglPutusan'])->format('Y-m-d');
+        $DataPerkawinan_new = DataPerkawinan::create($DataPerkawinan);
+        $pendaftaran=[
+            'id'=>$this->unikKey,
+            'suami_id'=> $dataSuami['nik'],
+            'AyahSuami_id'=> $dataAyahSuami['nik'],
+            'IbuSuami_id'=> $dataIbuSuami['nik'],
+            'istri_id'=> $dataIstri['nik'],
+            'AyahIstri_id'=> $dataAyahIstri['nik'],
+            'IbuIstri_id'=> $dataIbuIstri['nik'],
+            'SaksiI_id'=> $dataSaksiI['nik'],
+            'SaksiII_id'=> $dataSaksiII['nik'],
+            'DataPerkawinan_id'=> $DataPerkawinan_new['id'],
+            'doc_id'=> $this->unikKey
+        ];
+        Pendaftaran::create($pendaftaran);
+        //Suami
+        Suami::firstOrCreate($dataSuami);
+        AyahSuami::firstOrCreate($dataAyahSuami);
+        IbuSuami::firstOrCreate($dataIbuSuami);
+        //Istri
+        Istri::firstOrCreate($dataIstri);
+        AyahIstri::firstOrCreate($dataAyahIstri);
+        IbuIstri::firstOrCreate($dataIbuIstri);
+        //Saksi
+        SaksiI::firstOrCreate($dataSaksiI);
+        SaksiII::firstOrCreate($dataSaksiII);
         $this->uploadDoc($request->file('doc'),$path);
+        //dd($request->all());
+        //dd($pendaftaran);
+        //$this->uploadDoc($request->file('doc'),$path);
         //dd($request->file('doc'));
         //$date = Carbon::createFromFormat('d/m/Y',$dataSuami['tglLhr']);
         //dd($date->format('Y-m-d'));
         //dd($dataSuami['tglLhr']);
-        dd($request->all());
-        Suami::create($dataSuami);
-        dd($request->all());
+        return view('sukses')->with('nomor',$pendaftaran['id']);
+        //dd($request->all());
     }
 
     /**
@@ -160,5 +214,15 @@ class PendaftaranController extends Controller
 
     public function cetak(){
         return view('cetak');
+    }
+
+    public function sukses(Request $request){
+        return view('sukses');
+    }
+
+    public function printGan(Request $request){
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadHTML('<h1>Form Pendaftaran</h1><br/><h2>Nomor pendaftaran :'.$request->daftar_num.'</h2>');
+        return $pdf->stream();
     }
 }

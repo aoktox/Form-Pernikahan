@@ -29,7 +29,7 @@ class CreateDataIstriTable extends Migration
             $table->integer('kdPos');
             $table->string('telp');
             $table->integer('pendidikan');
-            $table->integer('job');
+            $table->string('job');
             $table->integer('anakKe');
             $table->integer('agama');
             $table->integer('status');

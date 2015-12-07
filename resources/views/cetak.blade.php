@@ -12,7 +12,7 @@
                                 Masukkan nomor pendaftaran
                             </div>
                         </h2>
-                        <form class="ui large form" method="POST" action="" id="cek_num_form">
+                        <form class="ui large form" method="POST" action="print" id="cek_num_form">
                             {{ csrf_field() }}
                             <div class="ui">
                                 <div class="field">
@@ -54,10 +54,10 @@
                                                 type: 'empty',
                                                 prompt: 'Masukkan nomor pendaftaran'
                                             },
-                                            {
-                                                type: 'number',
-                                                prompt: 'Pastikan anda memasukkan NOMOR'
-                                            },
+//                                            {
+//                                                type: 'number',
+//                                                prompt: 'Pastikan anda memasukkan NOMOR'
+//                                            },
                                         ]
                                     }
                                 }
