@@ -17,10 +17,10 @@ class Indonesia extends Controller
     public function getProvinsi(Request $request){
         /*dd($request->id);*/
 
-        return response()->json(Provinsi::all());
-        /*return '
-
-        ';*/
+        //print_r(Provinsi::all()->toJson());
+        $prov = Provinsi::find($request->id);
+        echo "<pre>";
+        print_r($prov->kabupaten);
     }
     public function getKabupaten(Request $request){
         $data = Kabupaten::where('id_prov', $request->id)->get();
